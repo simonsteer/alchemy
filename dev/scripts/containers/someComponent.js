@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
     basic: state.basic
   }
 })
-export default class Main extends React.Component {
+export default class someComponent extends React.Component {
   render() {
     console.log(this.props)
     return (
