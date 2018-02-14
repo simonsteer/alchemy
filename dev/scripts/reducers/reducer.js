@@ -1,4 +1,6 @@
-const initialState = {}
+const initialState = {
+  data: 'some data'
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {

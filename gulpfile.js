@@ -11,17 +11,10 @@ const plumber = require('gulp-plumber');
 const concat = require('gulp-concat');
 const historyApiFallback = require('connect-history-api-fallback');
 
-gulp.task('styles-white', () => {
-	return gulp.src('./dev/styles/styles-white.scss')
+gulp.task('styles', () => {
+	return gulp.src('./dev/styles/styles.scss')
 		.pipe(sass().on('error', sass.logError))
-		.pipe(concat('style-white.css'))
-		.pipe(gulp.dest('./public/styles'))
-});
-
-gulp.task('styles-black', () => {
-	return gulp.src('./dev/styles/styles-black.scss')
-		.pipe(sass().on('error', sass.logError))
-		.pipe(concat('style-black.css'))
+		.pipe(concat('styles.css'))
 		.pipe(gulp.dest('./public/styles'))
 });
 
@@ -52,8 +45,8 @@ gulp.task('bs', () => {
 	});
 });
 
-gulp.task('default', ['bs','js','styles-black', 'styles-white'], () => {
+gulp.task('default', ['bs','js','styles'], () => {
 	gulp.watch('dev/**/*.js',['js']);
-	gulp.watch('dev/**/*.scss',['styles-white', 'styles-black']);
+	gulp.watch('dev/**/*.scss',['styles']);
 	gulp.watch('./public/styles/*.css', reload);
 });

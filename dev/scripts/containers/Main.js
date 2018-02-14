@@ -1,17 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import Component from '../components/Component'
+
 @connect(state => {
   return {
     axios: state.axios,
     basic: state.basic
   }
 })
-export default class someComponent extends React.Component {
+export default class Main extends React.Component {
   render() {
-    console.log(this.props)
+
+    const { axios, basic } = this.props
+
     return (
-      <h1>Hello World!</h1>
+      <Component prop={basic.data} />
     )
   }
 }
