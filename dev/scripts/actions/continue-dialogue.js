@@ -1,0 +1,1 @@
+export const continue_dialogue = { type: 'CONTINUE_DIALOGUE' }

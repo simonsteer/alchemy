@@ -1,0 +1,81 @@
+.overworld-container {
+    overflow: hidden;
+    transition: background-color 0.2s;
+    position: relative;
+    height: 100%;
+    width: 65vh;
+    min-width: 250px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.overworld-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.2s;
+    z-index: 999;
+}
+
+.blackout {
+    background: black;
+}
+
+.overworld {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.npc_x {
+    background: black;
+}
+
+.npc_d {
+    background: mediumslateblue;
+}
+
+.npc_0 {
+    background: lavender;
+    border-radius: 50%;
+}
+
+.npc_1 {
+    background: crimson;
+    border-radius: 50%;
+}
+
+.npc_2 {
+    background: forestgreen;
+    border-radius: 50%;
+}
+
+.npc_3 {
+    background: tomato;
+    &::after {
+        content: "˙_˙";
+    }
+}
+
+.npc_4 {
+    background: orange;
+    &::after {
+        content: "º‚º";
+    }
+}
+
+.npc_5 {
+    background: orchid;
+    &::after {
+        content: "°_°";
+    }
+}
+
+.npc_6 {
+    background: cornflowerblue;
+    &::after {
+        content: "•…•";
+    }
+}

@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 
-import basic from './reducer'
-import axios from './axios-reducer'
+import player from './player'
+import maps from './maps'
+import dialogue from './dialogue'
 
 export default combineReducers({
-  basic,
-  axios
+  player,
+  maps,
+  dialogue,
 })

@@ -1,0 +1,24 @@
+.dialogue-box {
+    width: 45%;
+    height: 33%;
+    padding: 2%;
+    position: absolute;
+    bottom: 5%;
+    left: calc(50% - 45% / 2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: white;
+    border: 1px solid black;
+    z-index: 9999;
+}
+
+.dialogue-text {
+    margin: 0;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.dialogue-button {
+    margin: 10% auto 0 auto;
+}

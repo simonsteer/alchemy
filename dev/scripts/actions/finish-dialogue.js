@@ -1,0 +1,1 @@
+export const finish_dialogue = { type: 'FINISH_DIALOGUE' }
