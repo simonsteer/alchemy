@@ -26,6 +26,11 @@ export default (dialogue = dialogue_setup, action) => {
         conversation: null,
         npc: null,
       }
+    case 'CAST_SPELL':
+      return {
+        ...dialogue,
+        ...action.payload.dialogue_effects,
+      }
     default:
       return dialogue
   }

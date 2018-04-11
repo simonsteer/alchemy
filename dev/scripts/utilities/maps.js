@@ -41,6 +41,7 @@ i = ice
 w = water
 g = gap
 s = loamy soil
+p = parched soil
 
 arrows = portals
 
@@ -81,6 +82,7 @@ export const tile_names = {
     ice: 'i',
     gap: 'g',
     soil: 's',
+    parched_soil: 'p',
     ingredient_1: '0',
     ingredient_2: '1',
     ingredient_3: '2',
@@ -98,20 +100,20 @@ export const maps = {
   [40]: {
     map: (
         '##########################################' +
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' +
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' +
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' +
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' +
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' +
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' +
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' +
-        'xxxxxxx                            xxxxxxx' + 
-        'xxxxxxx                            xxxxxxx' + 
-        'xxxxxxx                            xxxxxxx' + 
-        'xxxxxxx                            xxxxxxx' + 
-        'xxxxxxx   v                        xxxxxxx' + 
-        'xxxxxxx   3 4 5 6                  xxxxxxx' +
-        'xxxxxxx                            →      ' + 
+        'xxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx' +
+        'xxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx' +
+        'xxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx' +
+        'xxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx' +
+        'xxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx' +
+        'xxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx' +
+        'xxxxxxxxxxxxxxx↑xxxxxxxxxxxxxxxxxxxxxxxxxx' +
+        'xxxxxxxww wwwpppppw  wwwww   pp    xxxxxxx' + 
+        'xxxxxxxww ww ppppp    w  w     p   xxxxxxx' + 
+        'xxxxxxx wwwwwww   wwwwww  ww   p   xxxxxxx' + 
+        'xxxxxxx     ppwwwww         w      xxxxxxx' + 
+        'xxxxxxx   v       www  pw  pppp    xxxxxxx' + 
+        'xxxxxxx   3 4 ddd    p   www       xxxxxxx' +
+        'xxxxxxx           ppp          p   →      ' + 
         'xxxxxxxxxxxx↓xxxxxxxxxxxxxxxxxxxxxxxxxxxxx' +
         'xxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxx' +
         'xxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxx' +
@@ -135,13 +137,22 @@ export const maps = {
                     },
                     {
                         message: "Now get out of here!",
-                        persuaded_message: "Fine, I'll tell you. You can destroy green blocks with the spacebar!",
+                        persuaded_message: "Fine, I'll tell you. You can destroy purple squares with the spacebar!",
                     },
                     {
                         message: false,
                         persuaded_message: "Use this knowledge wisely.",
                     },
                 ],
+                item_held: {
+                    type: 'ingredient',
+                    name: 'Red Moss',
+                    value: {
+                        buy: 20,
+                        sell: 10,
+                    },
+                },
+                required_guile: 3,
             },
             4: {
                 ...npc,
@@ -168,7 +179,7 @@ export const maps = {
             6: {
                 ...npc,
             },
-        }
+        },
     }
   },
   [41]: {

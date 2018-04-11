@@ -9,7 +9,7 @@ const {
 } = tile_names
 
 const Map = ({ player }) => {
-  const { x, y, items, direction, view } = player
+  const { items, direction, view } = player
   let { map, meta } = player.current_map
 
   const map_width = map.lastIndexOf(map_width_checker) + 1
@@ -28,8 +28,8 @@ const Map = ({ player }) => {
 
   const player_styles = {
     position: 'absolute',
-    top: 'calc(50% - 2.5vh)',
-    left: 'calc(50% - 2.5vh)',
+    top: 'calc(50% - 2.5vh + 1px)',
+    left: 'calc(50% - 2.5vh + 1px)',
     background: 'red',
     color: 'white',
   }
@@ -47,10 +47,12 @@ const Map = ({ player }) => {
       <div className={`overworld-mask${view.fade ? ' blackout' : ''}`}>
       </div>
       <div className="overworld" style={map_styles}>
-        {map.map(tile =>
+        {map.map((tile, index) =>
           <div
             className={`npc_${tile}`}
             style={tile_styles}
+            key={tile + index}
+            identifier={index}
           ></div>
         )}
       </div>

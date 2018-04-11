@@ -17,22 +17,31 @@ const initial_stats = {
   thaumaturgy: 5,
   mesmerism: 5,
   sorcery: 5,
-  items: {},
+  items: {
+    ['Lavender']: {
+      type: 'ingredient',
+      name: 'Lavender',
+      value: {
+          buy: 10,
+          sell: 5,
+      },
+      amount: 3,
+    },
+  },
   experience: 0,
   experience_until_level_up: 100,
   skill_points: 0,
   current_map: {
     ...maps[40],
   },
-  x: 0,
-  y: 0,
   is_not_moving: true,
   direction: 0,
   view: {
     x: 0,
     y: 0,
     fade: false,
-  }
+  },
+  invisible: false,
 }
 
 export default (player = initial_stats, action) => {
@@ -54,7 +63,6 @@ export default (player = initial_stats, action) => {
       return {
         ...player,
         is_not_moving: false,
-        ...action.payload
       }
     case 'MOVE_FINISH':
       map[player_index + action.payload] = alchemist
@@ -62,28 +70,19 @@ export default (player = initial_stats, action) => {
       return {
         ...player,
         is_not_moving: true,
-        x: 0,
-        y: 0,
         current_map: {
           ...current_map,
           map
         },
       }
     case 'GET_ITEM':
-      if (items[action.payload.name]) {
-        return {
-          ...player,
-          items: {
-            ...items,
-            [action.payload.name]: player.items[action.payload.name] + 1,
-          }
-        }
-      } else {
-        return {
-          ...player,
-          items: {
-            ...items,
-            [action.payload.name]: 1,
+      return {
+        ...player,
+        items: {
+          ...items,
+          [action.payload.name]: {
+            ...action.payload,
+            amount: player.items[action.payload.name] ? player.items[action.payload.name].amount + 1 : 1,
           },
         }
       }
@@ -96,65 +95,12 @@ export default (player = initial_stats, action) => {
         },
       }
     case 'ENTER_PORTAL_START':
-      let { exit, map: next_map } = action.payload
-      let map_index
-      let entrance
-      let entrance_index
-      
-      switch (exit) {
-        case west_portal:
-        map_index = -1
-        entrance = east_portal
-        break
-        case south_portal:
-        map_index = 9
-        entrance = north_portal
-        break
-        case east_portal:
-        map_index = 1
-        entrance = west_portal
-        break
-        case north_portal:
-        map_index = -9
-        entrance = south_portal
-        break
-      }
-      
-      let destination = maps[player.current_map.meta.key + map_index]
-
-      const {
-        left,
-        up,
-        right,
-        down
-      } = array_movement_numbers(destination.map)
-
-      entrance_index =
-        exit === west_portal
-        ? left
-        : exit === north_portal
-        ? up
-        : exit === east_portal
-        ? right
-        : exit === south_portal
-        ? down
-        : 0
-
-      const new_player_index = destination.map.indexOf(entrance) + entrance_index
-      const destination_width = destination.map.lastIndexOf(map_width_checker) + 1
-
-      let y = Math.floor(new_player_index / destination_width)
-      let x = new_player_index % destination_width
-
-      destination.map[new_player_index] = alchemist
-
       return {
         ...player,
-        current_map: destination,
+        current_map: action.payload.map,
         view: {
           ...player.view,
-          x,
-          y,
+          ...action.payload.view,
         }
       }
       case 'ENTER_PORTAL_FINISH':
@@ -191,6 +137,15 @@ export default (player = initial_stats, action) => {
         return {
           ...player,
           is_not_moving: true,
+        }
+      case 'CAST_SPELL':
+        return {
+          ...player,
+          ...action.payload.player_effects,
+          current_map: {
+            ...player.current_map,
+            ...action.payload.map_effects,
+          }
         }
     default:
       return player

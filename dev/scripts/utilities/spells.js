@@ -1,6 +1,7 @@
 import { tile_names } from '../utilities/maps'
 
 const {
+    walkable,
     alchemist,
     destructible,
     npc_1,
@@ -16,7 +17,8 @@ const {
     ingredient_3,
     soil,
     water,
-    ice
+    ice,
+    gap
 } = tile_names
 
 const mesmerism = [
@@ -103,8 +105,8 @@ const mesmerism = [
     {
         category: 'mesmerism',
         level_required: 5,
-        name: 'Chimera of Invisibility',
-        description: 'Bend light around your body to appear invisible for 15 seconds.',
+        name: 'Mirage',
+        description: 'Bend light around your body to become invisible for 15 seconds.',
         cost: 100,
         experience: 200,
         targets_npc: false,
@@ -126,7 +128,7 @@ const sorcery = [
         description: 'Incinerate whatever is in front of you and reduce it to ash.',
         cost: 10,
         experience: 40,
-        targets_npc: true,
+        targets_npc: false,
         valid_targets: [
             destructible
         ],
@@ -143,7 +145,7 @@ const sorcery = [
         description: 'Instantly freeze or thaw a large body of water.',
         cost: 20,
         experience: 80,
-        targets_npc: true,
+        targets_npc: false,
         valid_targets: [
             water,
             ice,
@@ -160,7 +162,7 @@ const sorcery = [
         description: 'Transmute loamy soil to form an earthen barrier.',
         cost: 30,
         experience: 120,
-        targets_npc: true,
+        targets_npc: false,
         valid_targets: [
             soil
         ],
@@ -177,6 +179,13 @@ const sorcery = [
         cost: 50,
         experience: 160,
         targets_npc: false,
+        valid_targets: [
+            gap,
+            water,
+            ice,
+            walkable,
+            soil,
+        ],
         timed: false,
         ingredients: [
             { ['Phoenix Feather']: 2 },
@@ -190,13 +199,8 @@ const sorcery = [
         description: 'Call forth rain from the heavens and flood the current area.',
         cost: 100,
         experience: 200,
-        targets_npc: true,
-        valid_targets: [
-            npc_1,
-            npc_2,
-            npc_3,
-            npc_4,
-        ],
+        targets_npc: false,
+        valid_targets: false,
         timed: false,
         ingredients: [
             { ['Holy Water']: 5 },
@@ -284,8 +288,8 @@ const thaumaturgy = [
         targets_npc: false,
         timed: false,
         ingredients: [
-        { ['Meteor Fragment']: 6 },
-    ],
+            { ['Meteor Fragment']: 6 },
+        ],
     },
 ]
 

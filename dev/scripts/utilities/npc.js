@@ -19,4 +19,6 @@ export const npc = {
     persuaded: false,
     required_persuasion: false,
     conversation: default_conversation,
+    item_held: false,
+    required_guile: false,
 }

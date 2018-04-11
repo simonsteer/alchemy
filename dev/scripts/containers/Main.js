@@ -70,7 +70,7 @@ export default class Main extends React.Component {
   }
 
   move(event) {
-    const { dispatch, player, dialogue } = this.props
+    const { dispatch, player, dialogue, maps } = this.props
 
     if (
       event.keyCode > 40 ||
@@ -80,7 +80,7 @@ export default class Main extends React.Component {
       return
     }
 
-    const actions = arrow_actions(player, event.keyCode)
+    const actions = arrow_actions(player, event.keyCode, maps)
     const {
       turn,
       can_move,
@@ -124,14 +124,15 @@ export default class Main extends React.Component {
       }, 200)
 
       if (enter_portal.start) {
-        setTimeout(() => dispatch({ type: 'FADE_FINISH' }), 400)
-        setTimeout(() => dispatch({ type: 'RESUME_MOVEMENT' }), 600)
+        setTimeout(() => dispatch({ type: 'FADE_FINISH' }), 600)
+        setTimeout(() => dispatch({ type: 'RESUME_MOVEMENT' }), 800)
       }
 
     }
   }
 
   interact(event) {
+    event.preventDefault()
     const { dispatch, dialogue, player, maps } = this.props
     
     if (event.keyCode !== 32) {

@@ -1,5 +1,5 @@
 import { maps } from '../utilities/maps'
-
+ 
 const initial_maps = maps
 
 export default (maps = initial_maps, action) => {
@@ -8,26 +8,23 @@ export default (maps = initial_maps, action) => {
       return {
         ...maps,
         [action.payload.key]: {
-          ...maps[action.payload.key],
-          map: {
-            ...maps[action.payload.key].map,
-            map: action.payload.map,
-          }
+          ...maps[action.payload.key], 
+          map: action.payload.map,
         }
       }
-    case 'CAST_TARGETED_SPELL':
+    case 'CAST_SPELL':
+      const { key, target } = action.payload
+
       return {
         ...maps,
-        [action.payload.key]: {
-          ...maps[action.payload.key],
+        [key]: {
+          ...maps[key],
+          ...action.payload.map_effects,
           meta: {
-            ...maps[action.payload.key].meta,
+            ...maps[key].meta,
             npc: {
-              ...maps[action.payload.key].meta.npc,
-              [action.payload.target]: {
-                ...maps[action.payload.key].meta.npc[action.payload.target],
-                ...action.payload.effects,
-              }
+              ...maps[key].meta.npc,
+              ...action.payload.npc_effects,
             }
           }
         }
